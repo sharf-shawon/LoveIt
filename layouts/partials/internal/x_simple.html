@@ -1,1 +1,8 @@
-{{- template "_internal/shortcodes/x_simple.html" . -}}
+{{- $pc := site.Config.Privacy.Twitter -}}
+{{- if not $pc.Disable -}}
+    {{- with .Get 0 -}}
+        {{- $id := . -}}
+        {{- $url := printf "https://twitter.com/x/status/%s" $id -}}
+        <blockquote class="twitter-tweet"><a href="{{ $url }}"></a></blockquote>
+    {{- end -}}
+{{- end -}}

@@ -1,1 +1,13 @@
-{{- template "_internal/shortcodes/x.html" . -}}
+{{- $pc := site.Config.Privacy.Twitter -}}
+{{- if not $pc.Disable -}}
+    {{- with .Get 0 -}}
+        {{- $id := . -}}
+        {{- $url := printf "https://twitter.com/x/status/%s" $id -}}
+        {{- if $pc.Simple -}}
+            <blockquote class="twitter-tweet"><a href="{{ $url }}"></a></blockquote>
+        {{- else -}}
+            <blockquote class="twitter-tweet" data-dnt="{{ $pc.EnableDNT }}"><a href="{{ $url }}"></a></blockquote>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
